@@ -29,31 +29,6 @@ Welcome to **MedTrack**, a full-stack web application designed to help users man
 - Bootstrap for styling
 
 
-## 🧱 Project Structure
-
-medtrack/
-│
-├── backend/ # Node.js + Express backend
-│ ├── models/ # Mongoose schemas
-│ ├── routes/ # API endpoints
-│ ├── controllers/ # Business logic
-│ ├── middleware/ # JWT and error handlers
-│ ├── utils/ # Email and PDF services
-│ ├── .env
-│ └── server.js
-│
-├── frontend/ # React.js frontend
-│ ├── src/
-│ │ ├── pages/ # Routes like Login, Dashboard, AddReminder
-│ │ ├── components/ # Navbar, ReminderCard, etc.
-│ │ ├── services/ # Axios wrapper
-│ └── .env
-│
-├── README.md
-└── .gitignore
-
-
-
 ## ⚙️ Setup Instructions
 
 Follow the steps below to run MedTrack on your local machine.
