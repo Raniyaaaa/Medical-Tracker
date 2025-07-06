@@ -2,7 +2,7 @@
 
 Welcome to **MedTrack**, a full-stack web application designed to help users manage their medical records and reminders effortlessly. Whether you want to store your health documents securely, get notified about regular checkups or medications, or even share your data with doctors through OTP-based access – MedTrack has you covered.
 
----
+
 
 ## 🌟 What is MedTrack?
 
@@ -13,7 +13,7 @@ Welcome to **MedTrack**, a full-stack web application designed to help users man
 - Share their records securely with doctors using OTP-based access
 - Export their data as a PDF for offline storage
 
----
+
 
 ## 🔧 Technologies Used
 
@@ -28,7 +28,6 @@ Welcome to **MedTrack**, a full-stack web application designed to help users man
 - Axios for API calls
 - Bootstrap for styling
 
----
 
 ## 🧱 Project Structure
 
@@ -53,11 +52,7 @@ medtrack/
 ├── README.md
 └── .gitignore
 
-yaml
-Copy
-Edit
 
----
 
 ## ⚙️ Setup Instructions
 
@@ -65,48 +60,34 @@ Follow the steps below to run MedTrack on your local machine.
 
 ### 1️⃣ Clone the Repo
 
-```bash
 git clone https://github.com/Raniyaaaa/medtrack.git
 cd medtrack
 2️⃣ Backend Setup
-bash
-Copy
-Edit
 cd backend
 npm install
 Create a .env file in the /backend folder and add:
 
-env
-Copy
-Edit
 MONGO_URI=your_mongo_uri
 JWT_SECRET=your_jwt_secret
+
+AWS_ACCESS_KEY_ID=your_aws_access_key_id
+AWS_SECRET_ACCESS_KEY=your_aws_access_key
+AWS_REGION=your_region
+AWS_BUCKET_NAME=your_bucket_name
+
 EMAIL=youremail@gmail.com
 EMAIL_PASSWORD=your_email_password_or_app_pass
 PORT=8000
 Then start the server:
-
-bash
-Copy
-Edit
 node server.js
+
 3️⃣ Frontend Setup
-bash
-Copy
-Edit
 cd ../frontend
 npm install
 Create a .env file in the /frontend folder and add:
-
-env
-Copy
-Edit
 REACT_APP_API_BASE=http://localhost:8000/api
 Then start the frontend:
-
-bash
-Copy
-Edit
 npm start
+
 ✅ Frontend runs on: http://localhost:3000
 ✅ Backend runs on: http://localhost:8000
