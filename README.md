@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# 🩺 MedTrack - Personal Health Record & Reminder App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to **MedTrack**, a full-stack web application designed to help users manage their medical records and reminders effortlessly. Whether you want to store your health documents securely, get notified about regular checkups or medications, or even share your data with doctors through OTP-based access – MedTrack has you covered.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🌟 What is MedTrack?
 
-### `npm start`
+**MedTrack** is your digital health assistant. Users can:
+- Upload and organize medical records (e.g., prescriptions, lab reports)
+- Set reminders for medications and checkups with smart repeat options
+- Receive email reminders at the right time (based on type)
+- Share their records securely with doctors using OTP-based access
+- Export their data as a PDF for offline storage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🔧 Technologies Used
 
-### `npm test`
+### 📦 Backend:
+- Node.js + Express
+- MongoDB (via Mongoose)
+- JWT Authentication
+- Nodemailer (for sending OTPs and reminders)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 💻 Frontend:
+- React.js (with React Router)
+- Axios for API calls
+- Bootstrap for styling
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🧱 Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+medtrack/
+│
+├── backend/ # Node.js + Express backend
+│ ├── models/ # Mongoose schemas
+│ ├── routes/ # API endpoints
+│ ├── controllers/ # Business logic
+│ ├── middleware/ # JWT and error handlers
+│ ├── utils/ # Email and PDF services
+│ ├── .env
+│ └── server.js
+│
+├── frontend/ # React.js frontend
+│ ├── src/
+│ │ ├── pages/ # Routes like Login, Dashboard, AddReminder
+│ │ ├── components/ # Navbar, ReminderCard, etc.
+│ │ ├── services/ # Axios wrapper
+│ └── .env
+│
+├── README.md
+└── .gitignore
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+yaml
+Copy
+Edit
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## ⚙️ Setup Instructions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Follow the steps below to run MedTrack on your local machine.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1️⃣ Clone the Repo
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone https://github.com/Raniyaaaa/medtrack.git
+cd medtrack
+2️⃣ Backend Setup
+bash
+Copy
+Edit
+cd backend
+npm install
+Create a .env file in the /backend folder and add:
 
-## Learn More
+env
+Copy
+Edit
+MONGO_URI=your_mongo_uri
+JWT_SECRET=your_jwt_secret
+EMAIL=youremail@gmail.com
+EMAIL_PASSWORD=your_email_password_or_app_pass
+PORT=8000
+Then start the server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+bash
+Copy
+Edit
+node server.js
+3️⃣ Frontend Setup
+bash
+Copy
+Edit
+cd ../frontend
+npm install
+Create a .env file in the /frontend folder and add:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+env
+Copy
+Edit
+REACT_APP_API_BASE=http://localhost:8000/api
+Then start the frontend:
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+bash
+Copy
+Edit
+npm start
+✅ Frontend runs on: http://localhost:3000
+✅ Backend runs on: http://localhost:8000
