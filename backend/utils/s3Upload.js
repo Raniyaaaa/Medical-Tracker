@@ -1,6 +1,4 @@
 const AWS = require('aws-sdk');
-const path = require('path');
-const fs = require('fs');
 
 // AWS Config
 const s3 = new AWS.S3({
@@ -22,11 +20,10 @@ const uploadToS3 = async (fileBuffer, fileName, mimeType) => {
     Key: `records/${Date.now()}_${fileName}`,
     Body: fileBuffer,
     ContentType: mimeType,
-    ACL: 'public-read'
   };
 
   const data = await s3.upload(params).promise();
-  return data.Location; // public file URL
+  return data.Location;
 };
 
 module.exports = uploadToS3;
