@@ -11,8 +11,8 @@ if (mongoose.connection.readyState === 0) {
   mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  }).then(() => console.log('✅ Cron MongoDB connected'))
-    .catch(err => console.error('❌ MongoDB Error in Cron:', err));
+  }).then(() => console.log('Cron MongoDB connected'))
+    .catch(err => console.error('MongoDB Error in Cron:', err));
 }
 
 const transporter = nodemailer.createTransport({
@@ -23,7 +23,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// 🔁 Every minute
 cron.schedule('* * * * *', async () => {
   try {
     const now = new Date();
@@ -33,8 +32,6 @@ cron.schedule('* * * * *', async () => {
 
     for (let reminder of allReminders) {
       const { user, title, type, date, time, recurrence, selectedDays, notified } = reminder;
-
-      // Combine date and time into a full timestamp for today
       const [hour, minute] = time.split(':');
       const reminderTimeToday = new Date(now);
       reminderTimeToday.setHours(hour, minute, 0, 0);
@@ -49,7 +46,7 @@ cron.schedule('* * * * *', async () => {
         scheduledDate.setHours(hour, minute, 0, 0);
         if (!notified && now.getTime() === scheduledDate.getTime()) {
           shouldSend = true;
-          reminder.notified = true; // Only once
+          reminder.notified = true;
         }
       } else if (recurrence === 'daily') {
         if (isSameTime) shouldSend = true;
@@ -75,10 +72,10 @@ cron.schedule('* * * * *', async () => {
         });
 
         await reminder.save();
-        console.log(`📧 Reminder sent to ${user.email}: ${title}`);
+        console.log(`Reminder sent to ${user.email}: ${title}`);
       }
     }
   } catch (err) {
-    console.error('❌ Cron job error:', err.message);
+    console.error('Cron job error:', err.message);
   }
 });
