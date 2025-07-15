@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import { useParams } from 'react-router-dom';
 
 function AddReminder() {
-  const { id } = useParams(); // for edit
+  const { id } = useParams();
   const [form, setForm] = useState({
     title: '',
     type: 'checkup',
@@ -17,13 +17,12 @@ function AddReminder() {
 
   useEffect(() => {
     if (id) {
-      // Fetch reminder for editing
       API.get(`/reminders/${id}`).then(res => {
         const { title, type, date, time, recurrence, selectedDays, note } = res.data;
         setForm({
           title,
           type,
-          date: date?.split('T')[0], // format to yyyy-mm-dd
+          date: date?.split('T')[0],
           time,
           recurrence,
           selectedDays,
@@ -47,10 +46,10 @@ function AddReminder() {
     e.preventDefault();
     try {
       if (id) {
-        await API.put(`/reminders/${id}`, form); // UPDATE
+        await API.put(`/reminders/${id}`, form);
         alert('Reminder updated!');
       } else {
-        await API.post('/reminders/add', form); // CREATE
+        await API.post('/reminders/add', form);
         alert('Reminder added!');
       }
       window.location.href = '/dashboard';
