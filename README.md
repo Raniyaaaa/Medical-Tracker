@@ -1,10 +1,10 @@
-MedTrack - Personal Health Record & Reminder App
+# MedTrack - Personal Health Record & Reminder App
 
 Welcome to **MedTrack**, a full-stack web application designed to help users manage their medical records and reminders effortlessly. Whether you want to store your health documents securely, get notified about regular checkups or medications, or even share your data with doctors through OTP-based access – MedTrack has you covered.
 
 
 
-## 🌟 What is MedTrack?
+# What is MedTrack?
 
 **MedTrack** is your digital health assistant. Users can:
 - Upload and organize medical records (e.g., prescriptions, lab reports)
