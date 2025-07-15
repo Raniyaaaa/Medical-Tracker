@@ -7,7 +7,7 @@ const reminderSchema = new mongoose.Schema({
   date: { type: Date, required: true },
   time: { type: String, required: true },
   recurrence: { type: String, enum: ['once', 'daily', 'weekly', 'custom'], default: 'once' },
-  selectedDays: [{ type: String }], // Optional for custom
+  selectedDays: [{ type: String }],
   note: { type: String },
   notified: { type: Boolean, default: false }
 });
