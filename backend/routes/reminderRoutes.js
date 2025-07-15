@@ -11,8 +11,8 @@ const {
 
 router.post('/add', protect, addReminder);
 router.get('/', protect, getReminders);
-router.get('/:id', protect, getReminderById);       // GET /reminders/:id
-router.put('/:id', protect, updateReminder);        // PUT /reminders/:id
+router.get('/:id', protect, getReminderById);    
+router.put('/:id', protect, updateReminder);    
 router.delete('/:id', protect, deleteReminder);
 
 module.exports = router;
