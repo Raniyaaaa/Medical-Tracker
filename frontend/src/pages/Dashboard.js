@@ -25,7 +25,7 @@ function Dashboard() {
   };
 
   const editReminder = (id) => {
-    navigate(`/edit-reminder/${id}`); // you must create this route + component
+    navigate(`/edit-reminder/${id}`);
   };
 
   const downloadPdf = () => {
@@ -44,7 +44,7 @@ function Dashboard() {
       <Navbar />
       <div className="container mt-4">
         <h3>Your Medical Records</h3>
-        <button onClick={downloadPdf} className="btn btn-outline-primary my-2">📄 Download PDF</button>
+        <button onClick={downloadPdf} className="btn btn-outline-primary my-2">Download PDF</button>
         
         {records.map(rec => (
           <div key={rec._id} className="card my-2">

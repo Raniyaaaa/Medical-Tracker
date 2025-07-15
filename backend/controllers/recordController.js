@@ -9,10 +9,8 @@ exports.addRecord = async (req, res) => {
       return res.status(400).json({ error: 'File is required' });
     }
 
-    // Validate type/size if needed
     const file = req.file;
 
-    // Upload to S3
     const fileUrl = await uploadToS3(file.buffer, file.originalname, file.mimetype);
 
     const newRecord = new MedicalRecord({
@@ -27,7 +25,7 @@ exports.addRecord = async (req, res) => {
     const saved = await newRecord.save();
     res.status(201).json(saved);
   } catch (err) {
-    console.error('❌ Upload Error:', err);
+    console.error('Upload Error:', err);
     res.status(500).json({ error: err.message });
   }
 };

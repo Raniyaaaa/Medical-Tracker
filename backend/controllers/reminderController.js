@@ -1,6 +1,5 @@
 const Reminder = require('../models/Reminder');
 
-// Add a new reminder
 exports.addReminder = async (req, res) => {
   try {
     const { title, type, date, time, note } = req.body;
@@ -21,11 +20,10 @@ exports.addReminder = async (req, res) => {
   }
 };
 
-
-// Get all upcoming reminders
 exports.getReminders = async (req, res) => {
   try {
-    const reminders = await Reminder.find({ user: req.user._id }).sort({ date: 1 });
+    const reminders = await Reminder
+      .find({ user: req.user._id }).sort({ date: 1 });
     res.json(reminders);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -34,7 +32,8 @@ exports.getReminders = async (req, res) => {
 
 exports.getReminderById = async (req, res) => {
   try {
-    const reminder = await Reminder.findById(req.params.id);
+    const reminder = await Reminder
+      .findById(req.params.id);
     if (!reminder) return res.status(404).json({ error: 'Not found' });
     res.json(reminder);
   } catch (err) {
@@ -47,7 +46,8 @@ exports.updateReminder = async (req, res) => {
     const updated = await Reminder.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updated);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500)
+      .json({ error: err.message });
   }
 };
 

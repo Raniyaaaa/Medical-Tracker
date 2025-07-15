@@ -5,7 +5,6 @@ exports.downloadPdf = async (req, res) => {
   try {
     const records = await MedicalRecord.find({ user: req.user._id }).sort({ date: -1 });
 
-    // Setup PDF response
     const doc = new PDFDocument();
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'attachment; filename=medtrack-records.pdf');
