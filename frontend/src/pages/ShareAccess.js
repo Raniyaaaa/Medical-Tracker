@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import API from '../services/api';
+import axios from 'axios';
 import Navbar from '../components/Navbar';
 
 function ShareAccess() {
@@ -8,9 +8,19 @@ function ShareAccess() {
   const sendOtp = async (e) => {
     e.preventDefault();
     try {
-      await API.post('/share/send-otp', { doctorEmail: email });
+      const token = localStorage.getItem('token');
+      await axios.post(
+        `http://localhost:8000/share/send-otp`,
+        { doctorEmail: email },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
       alert('OTP sent to doctor');
     } catch (err) {
+      console.error(err);
       alert('Error sending OTP');
     }
   };
@@ -21,8 +31,13 @@ function ShareAccess() {
       <div className="container mt-4">
         <h3>Share Access with Doctor</h3>
         <form onSubmit={sendOtp}>
-          <input className="form-control my-2" placeholder="Doctor's Email"
-            value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            className="form-control my-2"
+            placeholder="Doctor's Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
           <button className="btn btn-warning">Send OTP</button>
         </form>
       </div>

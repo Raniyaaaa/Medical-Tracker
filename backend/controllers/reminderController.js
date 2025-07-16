@@ -1,19 +1,14 @@
 const Reminder = require('../models/Reminder');
 
-// Add a new reminder
 exports.addReminder = async (req, res) => {
   try {
-    const { title, type, date, time, note } = req.body;
+    const {title,type,date,time,recurrence,selectedDays,note} = req.body;
+    console.log("RRRRRR", req.body)
+    if (!title || !type || !date || !time) {
+      return res.status(400).json({ error: 'Title, Type, Date, and Time are required' });
+    }
 
-    const reminder = await Reminder.create({
-      user: req.user._id,
-      title,
-      type,
-      date,
-      time,
-      note
-    });
-
+    const reminder = await Reminder.create({user: req.user._id,title,type,date,time,recurrence,selectedDays,note,notified: false });
     res.status(201).json(reminder);
   } catch (err) {
     console.error("Error adding reminder:", err);
@@ -21,8 +16,6 @@ exports.addReminder = async (req, res) => {
   }
 };
 
-
-// Get all upcoming reminders
 exports.getReminders = async (req, res) => {
   try {
     const reminders = await Reminder.find({ user: req.user._id }).sort({ date: 1 });
@@ -35,7 +28,7 @@ exports.getReminders = async (req, res) => {
 exports.getReminderById = async (req, res) => {
   try {
     const reminder = await Reminder.findById(req.params.id);
-    if (!reminder) return res.status(404).json({ error: 'Not found' });
+    if (!reminder) return res.status(404).json({ error: 'Reminder not found' });
     res.json(reminder);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -44,7 +37,12 @@ exports.getReminderById = async (req, res) => {
 
 exports.updateReminder = async (req, res) => {
   try {
-    const updated = await Reminder.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const {title,type,date,time,recurrence = 'once',selectedDays = [],note = '',notified = false} = req.body;
+    const updated = await Reminder.findByIdAndUpdate(req.params.id,
+      {title,type,date,time,recurrence,selectedDays,note,notified},
+      { new: true }
+    );
+
     res.json(updated);
   } catch (err) {
     res.status(500).json({ error: err.message });

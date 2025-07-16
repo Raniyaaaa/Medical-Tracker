@@ -2,10 +2,6 @@ const OtpAccess = require('../models/OtpAccess');
 const MedicalRecord = require('../models/MedicalRecord');
 const sendOtpEmail = require('../utils/sendOtpEmail');
 
-// 🔧 Get current IST time
-const getIST = () => new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-
-// 🔐 Send OTP
 exports.sendOtp = async (req, res) => {
   try {
     const { doctorEmail } = req.body;
@@ -14,7 +10,7 @@ exports.sendOtp = async (req, res) => {
     const expiresAt = new Date(
       new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
     );
-    expiresAt.setMinutes(expiresAt.getMinutes() + 10); // 10 mins from now
+    expiresAt.setMinutes(expiresAt.getMinutes() + 10);
 
     const newOtp = new OtpAccess({
       user: req.user._id,
@@ -26,14 +22,13 @@ exports.sendOtp = async (req, res) => {
     await newOtp.save();
     await sendOtpEmail(doctorEmail, otp, expiresAt);
 
-    res.status(200).json({ msg: 'OTP sent successfully (IST)' });
+    res.status(200).json({ msg: 'OTP sent successfully' });
   } catch (err) {
-    console.error('❌ OTP Send Error:', err);
+    console.error('OTP Send Error:', err);
     res.status(500).json({ error: err.message });
   }
 };
 
-// ✅ Verify OTP and return records
 exports.verifyOtp = async (req, res) => {
   try {
     const { doctorEmail, otp } = req.body;
@@ -58,7 +53,7 @@ exports.verifyOtp = async (req, res) => {
       records
     });
   } catch (err) {
-    console.error('❌ OTP Verify Error:', err);
+    console.error('OTP Verify Error:', err);
     res.status(500).json({ error: err.message });
   }
 };

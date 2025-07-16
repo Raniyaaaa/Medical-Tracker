@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import API from '../services/api';
+import axios from 'axios';
 
 function VerifyOtp() {
   const [email, setEmail] = useState('');
@@ -11,7 +11,10 @@ function VerifyOtp() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const res = await API.post('/share/verify-otp', { doctorEmail: email, otp });
+      const res = await axios.post(
+        `http://localhost:8000/api/share/verify-otp`,
+        { doctorEmail: email, otp }
+      );
       setRecords(res.data.records);
       setPatientName(res.data.patient);
       setError('');
@@ -21,24 +24,43 @@ function VerifyOtp() {
   };
 
   const downloadPdf = () => {
-      API.get('/pdf/download', { responseType: 'blob' }).then(res => {
-        const url = window.URL.createObjectURL(new Blob([res.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'medtrack-records.pdf');
-        document.body.appendChild(link);
-        link.click();
-      });
-};
+    const token = localStorage.getItem('token');
+    axios.get(
+      `http://localhost:8000/pdf/download`,
+      {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        responseType: 'blob',
+      }
+    ).then(res => {
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'medtrack-records.pdf');
+      document.body.appendChild(link);
+      link.click();
+    }).catch(() => {
+      alert("Failed to download PDF");
+    });
+  };
 
   return (
     <div className="container mt-5">
       <h3>Doctor Access - Enter OTP</h3>
       <form onSubmit={submit} className="mb-3">
-        <input className="form-control my-2" placeholder="Your Email" value={email}
-          onChange={e => setEmail(e.target.value)} required />
-        <input className="form-control my-2" placeholder="Enter OTP" value={otp}
-          onChange={e => setOtp(e.target.value)} required />
+        <input
+          className="form-control my-2"
+          placeholder="Your Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          required
+        />
+        <input
+          className="form-control my-2"
+          placeholder="Enter OTP"
+          value={otp}
+          onChange={e => setOtp(e.target.value)}
+          required
+        />
         <button className="btn btn-primary">Verify OTP</button>
       </form>
 
@@ -47,14 +69,18 @@ function VerifyOtp() {
       {records && (
         <div>
           <h4>Records for {patientName}</h4>
-          <button onClick={downloadPdf} className="btn btn-outline-primary my-2">📄 Download PDF</button>
+          <button onClick={downloadPdf} className="btn btn-outline-primary my-2">
+            Download PDF
+          </button>
           {records.map(rec => (
             <div key={rec._id} className="card my-2">
               <div className="card-body">
                 <h5>{rec.title} ({rec.type})</h5>
                 <p>{rec.notes}</p>
                 <small>{new Date(rec.date).toLocaleDateString()}</small><br />
-                {rec.fileUrl && <a href={rec.fileUrl} target="_blank" rel="noreferrer">View File</a>}
+                {rec.fileUrl && (
+                  <a href={rec.fileUrl} target="_blank">View File</a>
+                )}
               </div>
             </div>
           ))}

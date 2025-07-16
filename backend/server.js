@@ -15,16 +15,13 @@ const reminderRoutes = require('./routes/reminderRoutes');
 const otpRoutes = require('./routes/otpRoutes');
 const pdfRoutes = require('./routes/pdfRoutes');
 
-app.use('/api/auth', authRoutes);
-app.use('/api/records', recordRoutes);
-app.use('/api/reminders', reminderRoutes);
-app.use('/api/share', otpRoutes);
-app.use('/api/pdf', pdfRoutes);
+app.use('/auth', authRoutes);
+app.use('/records', recordRoutes);
+app.use('/reminders', reminderRoutes);
+app.use('/share', otpRoutes);
+app.use('/pdf', pdfRoutes);
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
   console.log('MongoDB Connected');
   require('./cron/cronJobs');
   app.listen(8000, () => console.log('Server running on 8000'));
