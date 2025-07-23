@@ -12,7 +12,7 @@ function VerifyOtp() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/share/verify-otp`,
+        `http://localhost:8000/share/verify-otp`,
         { doctorEmail: email, otp }
       );
       setRecords(res.data.records);

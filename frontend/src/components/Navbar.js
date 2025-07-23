@@ -14,6 +14,8 @@ function Navbar() {
         <Link className="btn btn-light mx-1" to="/add-record">Add Record</Link>
         <Link className="btn btn-light mx-1" to="/add-reminder">Add Reminder</Link>
         <Link className="btn btn-light mx-1" to="/share-access">Share Access</Link>
+        <Link className="btn btn-light mx-1" to="/book-appointment">Book Appointment</Link>
+        <Link className="btn btn-light mx-1" to="/View-appointments">View appointments</Link>
         <button onClick={logout} className="btn btn-danger mx-1">Logout</button>
       </div>
     </nav>

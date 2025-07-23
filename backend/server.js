@@ -14,12 +14,16 @@ const recordRoutes = require('./routes/recordRoutes');
 const reminderRoutes = require('./routes/reminderRoutes');
 const otpRoutes = require('./routes/otpRoutes');
 const pdfRoutes = require('./routes/pdfRoutes');
+const doctorRoutes = require('./routes/doctorRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
 
 app.use('/auth', authRoutes);
 app.use('/records', recordRoutes);
 app.use('/reminders', reminderRoutes);
 app.use('/share', otpRoutes);
 app.use('/pdf', pdfRoutes);
+app.use('/doctor', doctorRoutes);
+app.use('/appointment', appointmentRoutes);
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
   console.log('MongoDB Connected');
