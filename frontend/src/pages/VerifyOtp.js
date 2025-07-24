@@ -79,7 +79,7 @@ function VerifyOtp() {
                 <p>{rec.notes}</p>
                 <small>{new Date(rec.date).toLocaleDateString()}</small><br />
                 {rec.fileUrl && (
-                  <a href={rec.fileUrl} target="_blank">View File</a>
+                  <a href={rec.fileUrl} target="_blank" rel="noreferrer">View File</a>
                 )}
               </div>
             </div>

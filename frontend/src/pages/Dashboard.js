@@ -23,7 +23,7 @@ function Dashboard() {
     axios.get(`${API_BASE}/reminders`, authHeader)
       .then(res => setReminders(res.data))
       .catch(err =>console.error(err));
-  }, [])
+  }, [authHeader])
 
 
   const deleteReminder = async (id) => {
@@ -72,7 +72,7 @@ function Dashboard() {
               <small>
                 {new Date(rec.date).toLocaleDateString()}</small><br />
               {rec.fileUrl && 
-              <a href={rec.fileUrl} target="_blank" >View File</a>}
+              <a href={rec.fileUrl} target="_blank" rel="noreferrer">View File</a>}
             </div>
           </div>
         ))}

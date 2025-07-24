@@ -41,7 +41,7 @@ function AddReminder() {
         })
         .catch(() => alert('Error fetching reminder'));
     }
-  }, [id]);
+  }, [id,authHeader]);
 
   const handleCheckboxChange = (day) => {
     setForm(prev => {
