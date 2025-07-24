@@ -11,7 +11,7 @@ function Appointments() {
 
   useEffect(() => {
     fetchAppointments();
-  }, []);
+  }, [fetchAppointments]);
 
   const fetchAppointments = async () => {
     try {
